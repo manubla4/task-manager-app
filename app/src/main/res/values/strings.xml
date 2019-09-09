@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TodoList</string>
+
+    <string name="hello_blank_fragment">Todo actions: </string>
+
+    <!--  To do  -->
+    <string name="title_activity_todo">Todo List</string>
+
+    <!-- Add  -->
+    <string name="title_activity_add">Add Action</string>
+    <string name="add_fragment_add">Add</string>
+    <string name="add_fragment_hint">Action</string>
+</resources>
