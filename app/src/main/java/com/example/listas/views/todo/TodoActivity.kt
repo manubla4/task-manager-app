@@ -15,9 +15,9 @@ class TodoActivity : AppCompatActivity() {
 
     private val addActionRequestCode = 1001
 
-    private val actions = arrayListOf(
-        Action(0, "Example Action")
-    )
+//    private val actions = arrayListOf(
+//        Action(0, "Example Action")
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

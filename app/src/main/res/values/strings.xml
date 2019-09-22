@@ -5,6 +5,7 @@
 
     <!--  To do  -->
     <string name="title_activity_todo">Todo List</string>
+    <string name="todo_fragment_empty_message">You do not have any TODOs yet. Press the + button to create yout first one.</string>
 
     <!-- Add  -->
     <string name="title_activity_add">Add Action</string>
@@ -19,4 +20,5 @@
     <string name="add_fragment_category_study">Study</string>
     <string name="add_fragment_category_shopping">Shopping</string>
     <string name="add_fragment_category_leisure">Leisure</string>
+
 </resources>
