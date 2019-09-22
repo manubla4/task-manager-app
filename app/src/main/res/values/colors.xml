@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="colorWork">#FF5722</color>
+    <color name="colorStudy">#4CAF50</color>
+    <color name="colorShopping">#3F51B5</color>
+    <color name="colorLeisure">#9C27B0</color>
 </resources>

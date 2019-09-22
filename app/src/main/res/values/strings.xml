@@ -9,5 +9,14 @@
     <!-- Add  -->
     <string name="title_activity_add">Add Action</string>
     <string name="add_fragment_add">Add</string>
-    <string name="add_fragment_hint">Action</string>
+    <string name="add_fragment_description_hint">Description</string>
+    <string name="add_fragment_category">Category</string>
+    <string name="add_fragment_priority">Priority</string>
+    <string name="add_fragment_priority_high">High Priority</string>
+    <string name="add_fragment_priority_medium">Medium Priority</string>
+    <string name="add_fragment_priority_low">Low Priority</string>
+    <string name="add_fragment_category_work">Work</string>
+    <string name="add_fragment_category_study">Study</string>
+    <string name="add_fragment_category_shopping">Shopping</string>
+    <string name="add_fragment_category_leisure">Leisure</string>
 </resources>

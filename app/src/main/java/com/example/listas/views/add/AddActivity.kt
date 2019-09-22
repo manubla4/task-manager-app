@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.listas.views.todo.TodoActivity
 import com.example.listas.R
+import com.example.listas.views.todo.TodoActivity
 import kotlinx.android.synthetic.main.activity_add.*
 
 class AddActivity : AppCompatActivity(), AddFragment.OnFragmentInteractionListener {

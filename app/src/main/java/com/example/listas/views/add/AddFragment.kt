@@ -42,10 +42,10 @@ class AddFragment : Fragment() {
     }
 
     private fun onAddButtonPressed() {
-        if (input.textString().isEmpty()) {
+        if (inputDescription.textString().isEmpty()) {
             return
         }
-        listener?.onFragmentInteraction(input.textString())
+        listener?.onFragmentInteraction(inputDescription.textString())
     }
 
     override fun onDetach() {
