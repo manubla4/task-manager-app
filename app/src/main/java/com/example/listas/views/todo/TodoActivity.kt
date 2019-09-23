@@ -15,9 +15,7 @@ class TodoActivity : AppCompatActivity() {
 
     private val addActionRequestCode = 1001
 
-//    private val actions = arrayListOf(
-//        Action(0, "Example Action")
-//    )
+    private val actions : ArrayList<Action> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,15 +56,15 @@ class TodoActivity : AppCompatActivity() {
             addActionRequestCode -> {
                 if (resultCode == Activity.RESULT_OK) {
                     data?.let {
-                        addActionToTodoList(it.getStringExtra(resultInput))
+                        addActionToTodoList(it.getParcelableExtra(resultInput))
                     }
                 }
             }
         }
     }
 
-    private fun addActionToTodoList(action: String) {
-        actions.add(Action(0, action))
+    private fun addActionToTodoList(action: Action) {
+        actions.add(action)
         updateCurrentFragment()
     }
 

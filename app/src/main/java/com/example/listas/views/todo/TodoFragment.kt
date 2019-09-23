@@ -28,10 +28,12 @@ class TodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         todoList.layoutManager = LinearLayoutManager(activity)
-        todoList.adapter = TodoListAdapter(actions)
+        todoList.adapter = TodoListAdapter(actions, requireContext())
     }
 
     fun updateAdapterData(actions: ArrayList<Action>) {
+        todoList.visibility = View.VISIBLE
+        txtEmpty.visibility = View.GONE
         todoList.adapter.also {
             (it as? TodoListAdapter)?.let { todoListAdapter ->
                 todoListAdapter.data = actions

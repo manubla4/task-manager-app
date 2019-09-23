@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
+import com.example.listas.data.Action
 import com.example.listas.views.todo.TodoActivity
 import kotlinx.android.synthetic.main.activity_add.*
 
@@ -20,7 +21,7 @@ class AddActivity : AppCompatActivity(), AddFragment.OnFragmentInteractionListen
             .commit()
     }
 
-    override fun onFragmentInteraction(input: String) {
+    override fun onFragmentInteraction(input: Action) {
         setResult(
             Activity.RESULT_OK,
             Intent(this, TodoActivity::class.java)
