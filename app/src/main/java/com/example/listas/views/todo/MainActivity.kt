@@ -9,9 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
 import com.example.listas.data.Action
 import com.example.listas.views.add.AddActivity
-import kotlinx.android.synthetic.main.activity_todo.*
+import kotlinx.android.synthetic.main.activity_main.*
 
-class TodoActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val addActionRequestCode = 1001
 
@@ -29,7 +29,6 @@ class TodoActivity : AppCompatActivity() {
                 TodoFragment.newInstance(actions), TodoFragment.todoFragmentTag
             )
             .commit()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
