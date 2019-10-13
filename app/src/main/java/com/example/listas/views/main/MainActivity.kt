@@ -1,4 +1,4 @@
-package com.example.listas.views.todo
+package com.example.listas.views.main
 
 import android.app.Activity
 import android.content.Intent
@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
 import com.example.listas.data.Action
 import com.example.listas.views.add.AddActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.example.listas.views.todo.TodoFragment
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,14 +20,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_todo)
+        setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction()
             .add(
                 R.id.container,
-                TodoFragment.newInstance(actions), TodoFragment.todoFragmentTag
+                TodoFragment.newInstance(actions),
+                TodoFragment.todoFragmentTag
             )
             .commit()
     }

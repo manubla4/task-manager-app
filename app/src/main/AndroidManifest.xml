@@ -21,7 +21,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.example.listas.views.todo.MainActivity"
+            android:name="com.example.listas.views.main.MainActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_todo">
             <intent-filter>

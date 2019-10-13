@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
 import com.example.listas.data.Action
-import com.example.listas.views.todo.MainActivity
-import kotlinx.android.synthetic.main.activity_add.*
+import com.example.listas.views.main.MainActivity
+import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class AddActivity : AppCompatActivity(), AddFragment.OnFragmentInteractionListener {
 
