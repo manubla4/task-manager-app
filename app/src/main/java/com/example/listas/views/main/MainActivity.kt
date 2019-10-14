@@ -10,7 +10,6 @@ import com.example.listas.R
 import com.example.listas.data.Action
 import com.example.listas.views.add.AddActivity
 import com.example.listas.views.todo.TodoFragment
-import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +20,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        setSupportActionBar(toolbar)
 
         supportFragmentManager.beginTransaction()
             .add(

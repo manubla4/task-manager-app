@@ -17,13 +17,12 @@
         <activity
             android:name="com.example.listas.views.add.AddActivity"
             android:label="@string/title_activity_add"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
         </activity>
         <activity
             android:name="com.example.listas.views.main.MainActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_todo">
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

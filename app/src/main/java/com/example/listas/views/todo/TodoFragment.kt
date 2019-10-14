@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listas.R
 import com.example.listas.data.Action
+import com.example.listas.views.main.BaseFragment
 import kotlinx.android.synthetic.main.fragment_todo.*
 
-class TodoFragment : Fragment() {
+class TodoFragment : BaseFragment() {
 
     lateinit var actions: List<Action>
 
@@ -34,7 +35,7 @@ class TodoFragment : Fragment() {
     fun updateAdapterData(actions: ArrayList<Action>) {
         todoList.visibility = View.VISIBLE
         txtEmpty.visibility = View.GONE
-        todoList.adapter.also {
+        todoList.adapter.let {
             (it as? TodoListAdapter)?.let { todoListAdapter ->
                 todoListAdapter.data = actions
             }
