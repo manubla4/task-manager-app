@@ -1,14 +1,13 @@
-package com.example.listas.views.todo
+package com.example.listas.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.listas.R
 import com.example.listas.data.Action
-import com.example.listas.views.main.BaseFragment
+import com.example.listas.views.adapters.TodoListAdapter
 import kotlinx.android.synthetic.main.fragment_todo.*
 
 class TodoFragment : BaseFragment() {
@@ -29,7 +28,8 @@ class TodoFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         todoList.layoutManager = LinearLayoutManager(activity)
-        todoList.adapter = TodoListAdapter(actions, requireContext())
+        todoList.adapter =
+            TodoListAdapter(actions, requireContext())
     }
 
     fun updateAdapterData(actions: ArrayList<Action>) {

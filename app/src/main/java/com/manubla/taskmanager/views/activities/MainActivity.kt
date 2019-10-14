@@ -1,4 +1,4 @@
-package com.example.listas.views.main
+package com.example.listas.views.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -8,8 +8,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
 import com.example.listas.data.Action
-import com.example.listas.views.add.AddActivity
-import com.example.listas.views.todo.TodoFragment
+import com.example.listas.views.fragments.TodoFragment
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.example.listas.views.add
+package com.example.listas.views.fragments
 
 import android.content.Context
 import android.os.Bundle

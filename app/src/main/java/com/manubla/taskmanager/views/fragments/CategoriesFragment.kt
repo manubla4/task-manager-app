@@ -1,17 +1,15 @@
-package com.example.listas.views.profile
+package com.example.listas.views.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.example.listas.R
-import com.example.listas.views.main.BaseFragment
 
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"
 
-class ProfileFragment : BaseFragment() {
+class CategoriesFragment : BaseFragment() {
 
 //    private var param1: String? = null
 //    private var param2: String? = null
@@ -29,13 +27,14 @@ class ProfileFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 
 
 
+
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun newInstance() = CategoriesFragment()
 
 //        fun newInstance(param1: String, param2: String) =
 //            HomeFragment().apply {

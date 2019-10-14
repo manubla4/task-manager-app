@@ -1,4 +1,4 @@
-package com.example.listas.views.add
+package com.example.listas.views.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -6,10 +6,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.listas.R
 import com.example.listas.data.Action
-import com.example.listas.views.main.MainActivity
+import com.example.listas.views.fragments.AddFragment
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-class AddActivity : AppCompatActivity(), AddFragment.OnFragmentInteractionListener {
+class AddActivity : AppCompatActivity(),
+    AddFragment.OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

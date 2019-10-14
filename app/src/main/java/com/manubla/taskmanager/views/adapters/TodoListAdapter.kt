@@ -1,4 +1,4 @@
-package com.example.listas.views.todo
+package com.example.listas.views.adapters
 
 import android.content.Context
 import android.graphics.Paint
