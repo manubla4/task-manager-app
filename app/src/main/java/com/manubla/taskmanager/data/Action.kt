@@ -1,4 +1,4 @@
-package com.example.listas.data
+package com.manubla.taskmanager.data
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

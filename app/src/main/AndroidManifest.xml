@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.listas">
+    package="com.manubla.taskmanager">
 
     <dist:module dist:instant="true" />
 
@@ -15,14 +15,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name="com.example.listas.views.add.AddActivity"
+            android:name=".views.activities.AddActivity"
             android:label="@string/title_activity_add"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name="com.example.listas.views.main.MainActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_main">
+            android:name=".views.activities.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

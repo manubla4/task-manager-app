@@ -1,16 +1,16 @@
-package com.example.listas.views.activities
+package com.manubla.taskmanager.views.activities
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.listas.R
-import com.example.listas.data.Action
-import com.example.listas.views.fragments.AddFragment
+import com.manubla.taskmanager.R
+import com.manubla.taskmanager.data.Action
+import com.manubla.taskmanager.views.fragments.AddFragment
+import com.manubla.taskmanager.views.fragments.BaseFragment
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
-class AddActivity : AppCompatActivity(),
-    AddFragment.OnFragmentInteractionListener {
+class AddActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

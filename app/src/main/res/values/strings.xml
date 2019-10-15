@@ -1,10 +1,9 @@
 <resources>
-    <string name="app_name">TodoList</string>
+    <string name="app_name">Task Manager</string>
 
     <string name="hello_blank_fragment">Todo actions: </string>
 
     <!--  To do  -->
-    <string name="title_activity_main">Task Manager</string>
     <string name="todo_fragment_empty_message">You do not have any TODOs yet. Press the + button to create yout first one.</string>
 
     <!-- Add  -->

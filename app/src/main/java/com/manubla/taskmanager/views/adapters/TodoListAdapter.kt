@@ -1,4 +1,4 @@
-package com.example.listas.views.adapters
+package com.manubla.taskmanager.views.adapters
 
 import android.content.Context
 import android.graphics.Paint
@@ -9,9 +9,9 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.listas.R
-import com.example.listas.data.Action
-import com.example.listas.data.Category
+import com.manubla.taskmanager.R
+import com.manubla.taskmanager.data.Action
+import com.manubla.taskmanager.data.Category
 import kotlinx.android.synthetic.main.layout_todo_row.view.*
 
 

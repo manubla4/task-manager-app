@@ -1,7 +1,8 @@
-package com.example.listas.views.fragments
+package com.manubla.taskmanager.views.fragments
 
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.manubla.taskmanager.data.Action
 
 
 open class BaseFragment : Fragment() {
@@ -22,7 +23,6 @@ open class BaseFragment : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        fun showProgress()
-        fun hideProgress()
+        fun onFragmentInteraction(input: Action)
     }
 }

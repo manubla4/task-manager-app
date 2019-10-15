@@ -1,4 +1,4 @@
-package com.example.listas.views.fragments
+package com.manubla.taskmanager.views.fragments
 
 import android.content.Context
 import android.os.Bundle
@@ -7,18 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.listas.R
-import com.example.listas.data.Action
-import com.example.listas.data.Category
-import com.example.listas.data.Priority
-import com.example.listas.extensions.textString
+import com.manubla.taskmanager.R
+import com.manubla.taskmanager.data.Action
+import com.manubla.taskmanager.data.Category
+import com.manubla.taskmanager.data.Priority
+import com.manubla.taskmanager.extensions.textString
 import kotlinx.android.synthetic.main.fragment_add.*
 
-class AddFragment : Fragment() {
-
-    interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(input: Action)
-    }
+class AddFragment : BaseFragment() {
 
     private var listener: OnFragmentInteractionListener? = null
 
