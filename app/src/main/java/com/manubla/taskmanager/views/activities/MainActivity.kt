@@ -1,7 +1,11 @@
 package com.manubla.taskmanager.views.activities
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.app.Activity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
@@ -12,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionListener {
 
-    private val addActionRequestCode = 1001
     private val actions : ArrayList<Action> = arrayListOf()
     private lateinit var prevMenuItem: MenuItem
 
@@ -63,6 +66,34 @@ class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionList
 
     }
 
+
+    fun showProgress() {
+        val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime)
+        progress.apply {
+            visibility = View.VISIBLE
+            animate().setDuration(shortAnimTime.toLong())
+                .alpha(1f)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        visibility = View.VISIBLE
+                    }
+                })
+        }
+    }
+
+    fun hideProgress() {
+        val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime)
+        progress.apply {
+            animate().setDuration(shortAnimTime.toLong())
+                .alpha(0f)
+                .setListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        visibility = View.INVISIBLE
+                    }
+                })
+        }
+    }
+
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 //        // Inflate the menu; this adds items to the action bar if it is present.
 //        menuInflater.inflate(R.menu.main_menu, menu)
@@ -111,7 +142,7 @@ class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionList
 
 
     override fun onFragmentInteraction(input: Action) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     companion object {
@@ -119,6 +150,9 @@ class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionList
         private const val POSITION_TODOS      = 1
         private const val POSITION_CATEGORIES = 2
         private const val POSITION_PROFILE    = 3
+
+        private const val ADD_ACTION_REQUEST_CODE = 1001
+
         const val resultInput = "String:Input"
     }
 }
