@@ -1,15 +1,16 @@
-package com.manubla.taskmanager.views.fragments
+package com.manubla.taskmanager.views.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.manubla.taskmanager.R
+import com.manubla.taskmanager.views.BaseFragment
 
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"
 
-class HomeFragment : BaseFragment() {
+class ProfileFragment : BaseFragment() {
 
 //    private var param1: String? = null
 //    private var param2: String? = null
@@ -27,14 +28,13 @@ class HomeFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
 
 
-
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = ProfileFragment()
 
 //        fun newInstance(param1: String, param2: String) =
 //            HomeFragment().apply {

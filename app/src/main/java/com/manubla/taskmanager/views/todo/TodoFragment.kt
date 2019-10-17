@@ -1,4 +1,4 @@
-package com.manubla.taskmanager.views.fragments
+package com.manubla.taskmanager.views.todo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.views.adapters.TodoListAdapter
+import com.manubla.taskmanager.views.BaseFragment
 import kotlinx.android.synthetic.main.fragment_todo.*
 
 class TodoFragment : BaseFragment() {

@@ -1,4 +1,4 @@
-package com.manubla.taskmanager.views.fragments
+package com.manubla.taskmanager.views
 
 import android.content.Context
 import androidx.fragment.app.Fragment

@@ -1,8 +1,7 @@
-package com.manubla.taskmanager.views.activities
+package com.manubla.taskmanager.views
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.app.Activity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -10,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.views.adapters.ViewPagerAdapter
-import com.manubla.taskmanager.views.fragments.*
+import com.manubla.taskmanager.views.categories.CategoriesFragment
+import com.manubla.taskmanager.views.home.HomeFragment
+import com.manubla.taskmanager.views.profile.ProfileFragment
+import com.manubla.taskmanager.views.todo.TodoFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionListener {
@@ -29,7 +30,8 @@ class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionList
         val profileFragment = ProfileFragment.newInstance()
 
         viewpager.apply{
-            offscreenPageLimit = POSITION_PROFILE
+            offscreenPageLimit =
+                POSITION_PROFILE
             adapter = ViewPagerAdapter(supportFragmentManager).apply {
                 addFragment(homeFragment)
                 addFragment(todoFragment)
@@ -56,10 +58,14 @@ class MainActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionList
 
         navigation.setOnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.navigation_home -> viewpager.currentItem = POSITION_HOME
-                R.id.navigation_todos -> viewpager.currentItem = POSITION_TODOS
-                R.id.navigation_categories -> viewpager.currentItem = POSITION_CATEGORIES
-                R.id.navigation_profile -> viewpager.currentItem = POSITION_PROFILE
+                R.id.navigation_home -> viewpager.currentItem =
+                    POSITION_HOME
+                R.id.navigation_todos -> viewpager.currentItem =
+                    POSITION_TODOS
+                R.id.navigation_categories -> viewpager.currentItem =
+                    POSITION_CATEGORIES
+                R.id.navigation_profile -> viewpager.currentItem =
+                    POSITION_PROFILE
             }
             true
         }

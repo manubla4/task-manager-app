@@ -1,4 +1,4 @@
-package com.manubla.taskmanager.views.adapters
+package com.manubla.taskmanager.views
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

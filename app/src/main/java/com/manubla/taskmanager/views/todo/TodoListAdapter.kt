@@ -1,4 +1,4 @@
-package com.manubla.taskmanager.views.adapters
+package com.manubla.taskmanager.views.todo
 
 import android.content.Context
 import android.graphics.Paint

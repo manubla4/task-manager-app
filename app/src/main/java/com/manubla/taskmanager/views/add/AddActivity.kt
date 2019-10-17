@@ -1,4 +1,4 @@
-package com.manubla.taskmanager.views.activities
+package com.manubla.taskmanager.views.add
 
 import android.app.Activity
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.views.fragments.AddFragment
-import com.manubla.taskmanager.views.fragments.BaseFragment
+import com.manubla.taskmanager.views.MainActivity
+import com.manubla.taskmanager.views.BaseFragment
 import kotlinx.android.synthetic.main.layout_toolbar.*
 
 class AddActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionListener {
