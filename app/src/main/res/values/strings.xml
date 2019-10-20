@@ -4,10 +4,10 @@
     <string name="hello_blank_fragment">Todo actions: </string>
 
     <!--  To do  -->
-    <string name="todo_fragment_empty_message">You do not have any TODOs yet. Press the + button to create yout first one.</string>
+    <string name="todo_fragment_empty_message">You do not have any TODOs yet. Press the + button to create your first one.</string>
 
-    <!-- Add  -->
-    <string name="title_activity_add">Add Action</string>
+    <!-- Add -->
+    <string name="title_activity_add">Add Todo</string>
     <string name="add_fragment_add">Add</string>
     <string name="add_fragment_description_hint">Description</string>
     <string name="add_fragment_category">Category</string>
@@ -19,5 +19,19 @@
     <string name="add_fragment_category_study">Study</string>
     <string name="add_fragment_category_shopping">Shopping</string>
     <string name="add_fragment_category_leisure">Leisure</string>
+
+    <!-- Auth  -->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_up_underline"><u>Sign up</u></string>
+    <string name="sign_up_question">Don\'t have an account?</string>
+    <string name="log_out">Log out</string>
+    <string name="field_empty">This field can\'t be empty</string>
+    <string name="service_error">The credentials are not valid</string>
+    <string name="name">Name</string>
+    <string name="confirm_password">Confirm Password</string>
+
 
 </resources>
