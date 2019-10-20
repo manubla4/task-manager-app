@@ -1,4 +1,4 @@
-package com.diegomedina.notesapp.service.response
+package com.manubla.taskmanager.service.response
 
 data class TokenResponse(
     val authToken: String

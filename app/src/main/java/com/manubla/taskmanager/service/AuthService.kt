@@ -1,10 +1,10 @@
 package com.manubla.taskmanager.service
 
-import com.diegomedina.notesapp.service.request.LoginRequest
-import com.diegomedina.notesapp.service.response.SuccessReponse
-import com.diegomedina.notesapp.service.response.TokenResponse
+import com.manubla.taskmanager.service.request.LoginRequest
+import com.manubla.taskmanager.service.request.SignupRequest
+import com.manubla.taskmanager.service.response.SuccessReponse
+import com.manubla.taskmanager.service.response.TokenResponse
 import retrofit2.http.Body
-import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthService {
@@ -13,4 +13,7 @@ interface AuthService {
 
     @POST("auth/logout")
     suspend fun logout(): SuccessReponse
+
+    @POST("auth/signup")
+    suspend fun signup(@Body loginRequest: SignupRequest): TokenResponse
 }

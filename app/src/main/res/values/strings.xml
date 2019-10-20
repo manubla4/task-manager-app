@@ -29,9 +29,13 @@
     <string name="sign_up_question">Don\'t have an account?</string>
     <string name="log_out">Log out</string>
     <string name="field_empty">This field can\'t be empty</string>
-    <string name="service_error">The credentials are not valid</string>
+    <string name="login_error">The credentials are not valid</string>
     <string name="name">Name</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="passwords_dont_match">Passwords don\'t match</string>
+    <string name="signup_error">The user couldn\'t be created</string>
+    <string name="wrong_format">Wrong format</string>
+    <string name="signup_success">User created</string>
 
 
 </resources>

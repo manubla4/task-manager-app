@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.controller.AuthController
 import com.manubla.taskmanager.extension.editableTextString
+import com.manubla.taskmanager.extension.gone
+import com.manubla.taskmanager.extension.visible
+import com.manubla.taskmanager.util.emailRegex
 import com.manubla.taskmanager.util.showLongErrorMessage
 import com.manubla.taskmanager.view.home.HomeActivity
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -47,31 +50,59 @@ class LoginFragment : Fragment(), CoroutineScope {
         }
     }
 
+    private fun startLoading(){
+        loginButton.gone()
+        loginProgress.visible()
+    }
+    private fun stopLoading(){
+        loginProgress.gone()
+        loginButton.visible()
+    }
+
+    private fun validateFields(email : String, password : String) : Boolean {
+        emailInputLayout.error = null
+        passwordInputLayout.error = null
+
+        var result = true
+
+        if (email.isBlank()) {
+            emailInputLayout.error = getString(R.string.field_empty)
+            result = false
+        }
+        else if (!emailRegex.matcher(email).matches()) {
+            emailInputLayout.error = getString(R.string.wrong_format)
+            result = false
+        }
+
+        if (password.isBlank()) {
+            passwordInputLayout.error = getString(R.string.field_empty)
+            result = false
+        }
+
+        return result
+    }
+
     private fun login() {
         val email = emailEditText.editableTextString()
         val password = passwordEditText.editableTextString()
 
-        if (email.isBlank() || password.isBlank()) {
-            if (email.isBlank())
-                emailInputLayout.error = getString(R.string.field_empty)
-            if (password.isBlank())
-                passwordInputLayout.error = getString(R.string.field_empty)
-        }
-        else {
-            emailInputLayout.error = null
-            passwordInputLayout.error = null
-
+        if (validateFields(email, password)) {
+            startLoading()
             launch(Dispatchers.IO) {
                 try {
                     authController.login(email, password)
                     withContext(Dispatchers.Main) {
+                        stopLoading()
                         activity?.let {
                             startActivity(Intent(it, HomeActivity::class.java))
                             it.finish()
                         }
                     }
                 } catch (exception: Exception) {
-                    showLongErrorMessage(getString(R.string.service_error), activity)
+                    withContext(Dispatchers.Main) {
+                        stopLoading()
+                        showLongErrorMessage(getString(R.string.login_error), view, activity)
+                    }
                 }
             }
         }

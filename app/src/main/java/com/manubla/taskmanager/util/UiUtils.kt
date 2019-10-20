@@ -1,8 +1,10 @@
 package com.manubla.taskmanager.util
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.view.KeyEvent
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -21,23 +23,22 @@ private var mSnackbar: WeakReference<Snackbar> = WeakReference<Snackbar>(null)
 private var mDialog: WeakReference<AlertDialog> = WeakReference<AlertDialog>(null)
 
 
-private fun showMessage(message: String, activity: Activity?, length: Int, state: Int) {
+private fun showMessage(message: String, view: View?, context: Context?, length: Int, state: Int) {
     val snackbarPrev = mSnackbar.get()
     if (snackbarPrev != null && snackbarPrev.isShown)
         snackbarPrev.dismiss()
 
-    if (activity != null) {
-        val view = activity.window.decorView.rootView
+    if (view != null && context != null) {
         val snackbar = Snackbar.make(view, message,
             (if (length == LENGTH_SHORT) Snackbar.LENGTH_SHORT else Snackbar.LENGTH_LONG))
         snackbar.apply {
             setAction("OK") { dismiss() }
             if (state == STATE_SUCCESS) {
-                view.setBackgroundColor(ContextCompat.getColor(activity,R.color.colorSuccess))
+                getView().setBackgroundColor(ContextCompat.getColor(context,R.color.colorSuccess))
                 setActionTextColor(Color.WHITE)
             }
             if (state == STATE_ERROR) {
-                view.setBackgroundColor(ContextCompat.getColor(activity,R.color.colorFailure))
+                getView().setBackgroundColor(ContextCompat.getColor(context,R.color.colorFailure))
                 setActionTextColor(Color.WHITE)
             }
             show()
@@ -47,28 +48,28 @@ private fun showMessage(message: String, activity: Activity?, length: Int, state
 }
 
 
-fun showLongMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_LONG, STATE_NORMAL)
+fun showLongMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_LONG, STATE_NORMAL)
 }
 
-fun showShortMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_SHORT, STATE_NORMAL)
+fun showShortMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_SHORT, STATE_NORMAL)
 }
 
-fun showLongSuccessMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_LONG, STATE_SUCCESS)
+fun showLongSuccessMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_LONG, STATE_SUCCESS)
 }
 
-fun showShortSuccessMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_SHORT, STATE_SUCCESS)
+fun showShortSuccessMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_SHORT, STATE_SUCCESS)
 }
 
-fun showLongErrorMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_LONG, STATE_ERROR)
+fun showLongErrorMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_LONG, STATE_ERROR)
 }
 
-fun showShortErrorMessage(message: String, activity: Activity?) {
-    showMessage(message, activity, LENGTH_SHORT, STATE_ERROR)
+fun showShortErrorMessage(message: String, view: View?, context: Context?) {
+    showMessage(message, view, context, LENGTH_SHORT, STATE_ERROR)
 }
 
 

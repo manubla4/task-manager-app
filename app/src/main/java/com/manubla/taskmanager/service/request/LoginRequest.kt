@@ -1,4 +1,4 @@
-package com.diegomedina.notesapp.service.request
+package com.manubla.taskmanager.service.request
 
 data class LoginRequest(
     val email: String,

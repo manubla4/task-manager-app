@@ -20,7 +20,8 @@
             android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="100"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,7 +37,8 @@
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:maxLength="100"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,7 +54,8 @@
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:maxLength="100"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,7 +71,9 @@
             android:id="@+id/rePasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:imeOptions="actionDone"
+            android:maxLength="100"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,5 +82,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_up" />
+
+    <ProgressBar
+        android:id="@+id/signUpProgress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/input_margin"
+        android:visibility="gone"/>
 
 </LinearLayout>
