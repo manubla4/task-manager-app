@@ -10,18 +10,17 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.manubla.taskmanager.R
-import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.data.Category
+import com.manubla.taskmanager.service.response.TodoResponse
 import kotlinx.android.synthetic.main.layout_todo_row.view.*
 
 
-class TodoListAdapter(private var actions: List<Action>, private var context : Context) :
+class TodoListAdapter(private var todos: List<TodoResponse>, private var context: Context) :
     RecyclerView.Adapter<TodoListAdapter.TodoViewHolder>() {
 
-    var data: List<Action>
-        get() = actions
+    var data: List<TodoResponse>
+        get() = todos
         set(value) {
-            actions = value
+            todos = value
             notifyDataSetChanged()
         }
 
@@ -35,9 +34,11 @@ class TodoListAdapter(private var actions: List<Action>, private var context : C
     }
 
     override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
-        val action = data[position]
-        holder.descriptionText.text = action.description
-        holder.priorityText.text = action.priority.description
+        val todo = data[position]
+        holder.descriptionText.text = todo.description
+        holder.priorityText.text = todo.priority.description
+        holder.viewCategory.setBackgroundColor(todo.category.color)
+
         when(action.category) {
             Category.WORK -> holder.viewCategory.setBackgroundColor(ContextCompat.getColor(context, R.color.colorWork))
             Category.STUDY -> holder.viewCategory.setBackgroundColor(ContextCompat.getColor(context, R.color.colorStudy))

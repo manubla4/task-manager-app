@@ -8,12 +8,6 @@
     <color name="colorSeparator">#E4E4E4</color>
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorTransparent">#00000000</color>
-
     <color name="colorSuccess">#4aab33</color>
     <color name="colorFailure">#DB1B36</color>
-
-    <color name="colorWork">#FF5722</color>
-    <color name="colorStudy">#4CAF50</color>
-    <color name="colorShopping">#3F51B5</color>
-    <color name="colorLeisure">#9C27B0</color>
 </resources>

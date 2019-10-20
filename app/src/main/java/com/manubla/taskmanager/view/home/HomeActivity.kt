@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 class HomeActivity : AppCompatActivity(),
     BaseFragment.OnFragmentInteractionListener {
 
-    private val actions : ArrayList<Action> = arrayListOf()
     private lateinit var prevMenuItem: MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +26,10 @@ class HomeActivity : AppCompatActivity(),
 
         if (savedInstanceState == null) {
 
-            val homeFragment = SummaryFragment.newInstance()
-            val todoFragment = TodoFragment.newInstance(actions)
-            val categoriesFragment = CategoriesFragment.newInstance()
-            val profileFragment = ProfileFragment.newInstance()
+            val homeFragment = SummaryFragment()
+            val todoFragment = TodoFragment()
+            val categoriesFragment = CategoriesFragment()
+            val profileFragment = ProfileFragment()
 
             viewpager.apply {
                 offscreenPageLimit =
@@ -143,7 +142,7 @@ class HomeActivity : AppCompatActivity(),
 //    }
 //
 //    private fun addActionToTodoList(action: Action) {
-//        actions.add(action)
+//        todos.add(action)
 //        updateCurrentFragment()
 //    }
 //
@@ -151,7 +150,7 @@ class HomeActivity : AppCompatActivity(),
 //        supportFragmentManager.findFragmentByTag(TodoFragment.todoFragmentTag).also {
 //            it?.let { fragment ->
 //                if (fragment.isVisible && fragment is TodoFragment) {
-//                    fragment.updateAdapterData(actions)
+//                    fragment.updateAdapterData(todos)
 //                }
 //            }
 //        }

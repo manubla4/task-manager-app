@@ -31,18 +31,4 @@ class CategoriesFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_categories, container, false)
     }
 
-
-
-
-    companion object {
-        fun newInstance() = CategoriesFragment()
-
-//        fun newInstance(param1: String, param2: String) =
-//            SummaryFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-    }
 }

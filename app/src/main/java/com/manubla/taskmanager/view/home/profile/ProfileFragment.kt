@@ -52,7 +52,4 @@ class ProfileFragment : BaseFragment() , CoroutineScope {
         }
     }
 
-    companion object {
-        fun newInstance() = ProfileFragment()
-    }
 }

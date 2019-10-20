@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.data.Category
 import com.manubla.taskmanager.data.Priority
 import com.manubla.taskmanager.extension.textString
 import com.manubla.taskmanager.view.home.BaseFragment
