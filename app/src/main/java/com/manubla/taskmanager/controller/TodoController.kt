@@ -19,4 +19,14 @@ class TodoController {
         return todoService.createTodo(request)
     }
 
+    suspend fun modifyTodo(id: Int, priority: String, description: String,
+                           dueDate: ZonedDateTime, completed: Boolean, categoryId: Int): TodoResponse {
+        val request = TodoRequest(priority, description, dueDate, completed, categoryId)
+        return todoService.modifyTodo(id, request)
+    }
+
+    suspend fun removeTodo(id : Int) {
+        todoService.removeTodo(id)
+    }
+
 }

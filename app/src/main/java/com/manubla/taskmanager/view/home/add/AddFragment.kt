@@ -125,6 +125,7 @@ class AddFragment : BaseFragment() , CoroutineScope {
             val category = categorySpinner.selectedItem as CategoryResponse
 
             val todo = TodoResponse(
+                -1,
                 descriptionInput.textString(),
                 false,
                 ZonedDateTime.parse(dueDateInput.contentDescription, DateTimeFormatter.ISO_ZONED_DATE_TIME),

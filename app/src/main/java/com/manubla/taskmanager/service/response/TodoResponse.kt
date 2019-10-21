@@ -6,6 +6,7 @@ import org.threeten.bp.ZonedDateTime
 
 @Parcelize
 data class TodoResponse(
+    val id: Int,
     val description: String,
     val completed: Boolean,
     val due_date: ZonedDateTime,

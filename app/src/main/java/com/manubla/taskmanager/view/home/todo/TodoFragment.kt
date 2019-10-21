@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.controller.TodoController
+import com.manubla.taskmanager.data.Action
 import com.manubla.taskmanager.extension.gone
 import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.service.response.TodoResponse
@@ -23,10 +24,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
-class TodoFragment : BaseFragment() , CoroutineScope {
-
+class TodoFragment : BaseFragment(), CoroutineScope, TodoListAdapter.OnAdapterInteraction {
     private val todoController = TodoController()
-    private var creating = true
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
@@ -40,7 +39,7 @@ class TodoFragment : BaseFragment() , CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
             todoList.layoutManager = LinearLayoutManager(it)
-            todoList.adapter = TodoListAdapter(listOf())
+            todoList.adapter = TodoListAdapter(this, arrayListOf())
             todoList.setHasFixedSize(true)
         }
         addFab.setOnClickListener {
@@ -52,11 +51,8 @@ class TodoFragment : BaseFragment() , CoroutineScope {
         swipeLayout.setOnRefreshListener {
             fetchTodos()
         }
-        if (creating) {
-            creating = false
-            startLoading()
-            fetchTodos()
-        }
+        startLoading()
+        fetchTodos()
     }
 
     private fun startLoading(){
@@ -68,6 +64,7 @@ class TodoFragment : BaseFragment() , CoroutineScope {
     private fun stopLoading(){
         progress.gone()
         todoList.visible()
+        listener?.onFragmentInteraction(Action(HomeActivity.HIDE_PROGRESS_ACTION))
         if (swipeLayout.isRefreshing) {
             showLongMessage(getString(R.string.refresh_successful), view, activity)
             swipeLayout.isRefreshing = false
@@ -122,6 +119,60 @@ class TodoFragment : BaseFragment() , CoroutineScope {
                 }
             }
         }
+    }
+
+    private fun removeTodo(todo: TodoResponse) {
+        launch(Dispatchers.IO) {
+            try {
+                todoController.removeTodo(todo.id)
+                withContext(Dispatchers.Main) {
+                    fetchTodos()
+                }
+            } catch (exception: Exception) {}
+            finally {
+                withContext(Dispatchers.Main) {
+                    fetchTodos()
+                }
+            }
+        }
+    }
+
+    private fun modifyTodo(completed: Boolean, todo: TodoResponse) {
+        launch(Dispatchers.IO) {
+            try {
+                todoController.modifyTodo(
+                    todo.id,
+                    todo.priority,
+                    todo.description,
+                    todo.due_date,
+                    completed,
+                    todo.category_id)
+                withContext(Dispatchers.Main) {
+                    fetchTodos()
+                }
+            } catch (exception: Exception) {}
+            finally {
+                withContext(Dispatchers.Main) {
+                    fetchTodos()
+                }
+            }
+        }
+    }
+
+
+    override fun onModifyTodo(completed: Boolean, todo: TodoResponse) {
+        listener?.onFragmentInteraction(Action(HomeActivity.SHOW_PROGRESS_ACTION))
+        modifyTodo(completed, todo)
+    }
+
+    override fun onRemoveTodo(todo: TodoResponse) {
+        listener?.onFragmentInteraction(Action(HomeActivity.SHOW_PROGRESS_ACTION))
+        removeTodo(todo)
+    }
+
+    fun onAddTodo(todo: TodoResponse) {
+        startLoading()
+        createTodo(todo)
     }
 
     companion object {

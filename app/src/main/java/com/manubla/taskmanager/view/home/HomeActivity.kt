@@ -7,12 +7,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.extension.invisible
+import com.manubla.taskmanager.extension.gone
 import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.view.home.categories.CategoriesFragment
 import com.manubla.taskmanager.view.home.profile.ProfileFragment
@@ -92,7 +91,7 @@ class HomeActivity : AppCompatActivity(),
     fun showProgress() {
         val shortAnimTime = resources.getInteger(android.R.integer.config_shortAnimTime)
         progress.apply {
-            visibility = View.VISIBLE
+            visible()
             animate().setDuration(shortAnimTime.toLong())
                 .alpha(1f)
                 .setListener(object : AnimatorListenerAdapter() {
@@ -110,7 +109,7 @@ class HomeActivity : AppCompatActivity(),
                 .alpha(0f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        invisible()
+                        gone()
                     }
                 })
         }
@@ -123,7 +122,7 @@ class HomeActivity : AppCompatActivity(),
             ADD_TODO_REQUEST_CODE -> {
                 if (resultCode == Activity.RESULT_OK && TodoFragment.instance.isVisible) {
                     data?.let {
-                        TodoFragment.instance.createTodo(it.getParcelableExtra(resultInput))
+                        TodoFragment.instance.onAddTodo(it.getParcelableExtra(resultInput))
                     }
                 }
             }
