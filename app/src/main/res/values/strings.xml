@@ -24,6 +24,7 @@
     <string name="add_fragment_category_leisure">Leisure</string>
     <string name="add_fragment_select_priority">Select a Priority</string>
     <string name="add_fragment_due_date_hint">Due date</string>
+    <string name="add_fragment_due_date_later">The date needs to be later than today</string>
 
     <!-- Auth  -->
     <string name="auth_activity_email">Email</string>
@@ -40,7 +41,13 @@
     <string name="auth_activity_signup_error">The user couldn\'t be created</string>
     <string name="auth_activity_wrong_format">Wrong format</string>
     <string name="auth_activity_signup_success">User created</string>
-    <string name="add_fragment_due_date_later">The date needs to be later than today</string>
+
+    <!-- Profile  -->
+    <string name="profile_fragment_joined">Joined on</string>
+    <string name="profile_fragment_categories_used">Categories used</string>
+    <string name="profile_fragment_total_tasks">Total tasks</string>
+    <string name="profile_fragment_tasks_completed">Tasks completed</string>
+    <string name="profile_fragment_categories_most_used">Most used category</string>
 
 
 </resources>
