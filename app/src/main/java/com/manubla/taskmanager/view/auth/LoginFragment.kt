@@ -70,7 +70,7 @@ class LoginFragment : Fragment(), CoroutineScope {
             result = false
         }
         else if (!emailRegex.matcher(email).matches()) {
-            emailInputLayout.error = getString(R.string.wrong_format)
+            emailInputLayout.error = getString(R.string.auth_activity_wrong_format)
             result = false
         }
 
@@ -101,7 +101,7 @@ class LoginFragment : Fragment(), CoroutineScope {
                 } catch (exception: Exception) {
                     withContext(Dispatchers.Main) {
                         stopLoading()
-                        showLongErrorMessage(getString(R.string.login_error), view, activity)
+                        showLongErrorMessage(getString(R.string.auth_activity_login_error), view, activity)
                     }
                 }
             }

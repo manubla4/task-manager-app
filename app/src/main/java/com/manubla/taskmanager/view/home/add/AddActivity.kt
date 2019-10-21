@@ -3,6 +3,7 @@ package com.manubla.taskmanager.view.home.add
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import androidx.appcompat.app.AppCompatActivity
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
@@ -24,7 +25,7 @@ class AddActivity : AppCompatActivity(), BaseFragment.OnFragmentInteractionListe
         }
     }
 
-    override fun onFragmentInteraction(input: Action) {
+    override fun onFragmentInteraction(input: Parcelable) {
         setResult(
             Activity.RESULT_OK,
             Intent(this, HomeActivity::class.java)

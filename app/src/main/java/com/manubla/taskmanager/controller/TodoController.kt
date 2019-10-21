@@ -1,13 +1,22 @@
 package com.manubla.taskmanager.controller
 
 import com.manubla.taskmanager.service.TodoService
-import com.manubla.taskmanager.service.response.TodosReponse
+import com.manubla.taskmanager.service.request.TodoRequest
+import com.manubla.taskmanager.service.response.TodoResponse
+import org.threeten.bp.ZonedDateTime
 
 class TodoController {
+
     private val todoService = RetrofitController.retrofit.create(TodoService::class.java)
 
-    suspend fun getTodos(): TodosReponse {
+    suspend fun getTodos(): List<TodoResponse> {
        return todoService.getTodos()
+    }
+
+    suspend fun createTodo(priority: String, description: String,
+                           dueDate: ZonedDateTime, categoryId: Int): TodoResponse {
+        val request = TodoRequest(priority, description, dueDate, false, categoryId)
+        return todoService.createTodo(request)
     }
 
 }

@@ -1,13 +1,14 @@
 package com.manubla.taskmanager.view.home
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.fragment.app.Fragment
 import com.manubla.taskmanager.data.Action
 
 
 open class BaseFragment : Fragment() {
 
-    private var listener: OnFragmentInteractionListener? = null
+    var listener: OnFragmentInteractionListener? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -23,6 +24,6 @@ open class BaseFragment : Fragment() {
     }
 
     interface OnFragmentInteractionListener {
-        fun onFragmentInteraction(input: Action)
+        fun onFragmentInteraction(input: Parcelable)
     }
 }

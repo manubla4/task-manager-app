@@ -1,15 +1,14 @@
-package com.manubla.taskmanager.service.response
+package com.manubla.taskmanager.service.request
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 import org.threeten.bp.ZonedDateTime
 
 @Parcelize
-data class TodoResponse(
-    val description: String,
-    val completed: Boolean,
-    val due_date: ZonedDateTime,
+data class TodoRequest(
     val priority: String,
-    val category_id: Int,
-    val category: CategoryResponse
+    val description: String,
+    val due_date: ZonedDateTime,
+    val completed: Boolean,
+    val category_id: Int
 ) : Parcelable

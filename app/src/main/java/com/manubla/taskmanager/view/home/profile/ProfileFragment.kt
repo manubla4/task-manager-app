@@ -14,7 +14,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 import kotlin.coroutines.CoroutineContext
 
 
@@ -52,4 +51,7 @@ class ProfileFragment : BaseFragment() , CoroutineScope {
         }
     }
 
+    companion object {
+        val instance: ProfileFragment = ProfileFragment()
+    }
 }

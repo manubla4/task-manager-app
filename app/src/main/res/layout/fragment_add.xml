@@ -1,106 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.add.AddFragment"
-    android:gravity="center">
-
-    <EditText
-        android:id="@+id/inputDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:padding="16dp"
-        android:hint="@string/add_fragment_description_hint" />
-
+    tools:padding="@dimen/fragment_padding">
 
     <LinearLayout
-        android:id="@+id/layoutRadioGroups"
+        android:id="@+id/contentLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/inputDescription"
-        android:layout_centerHorizontal="true"
-        android:orientation="horizontal"
-        android:weightSum="5">
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:gravity="center"
+        android:orientation="vertical">
 
-
-        <RadioGroup
-            android:id="@+id/radioGroupPriority"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/descriptionInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_margin="16dp"
-            android:padding="16dp">
+            android:layout_marginBottom="@dimen/input_margin"
+            android:hint="@string/add_fragment_description_hint">
 
-            <RadioButton
-                android:id="@+id/radioHighPriority"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/descriptionInput"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
-                android:text="@string/add_fragment_priority_high" />
+                android:maxLength="100" />
 
-            <RadioButton
-                android:id="@+id/radioMediumPriority"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/add_fragment_priority_medium" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <RadioButton
-                android:id="@+id/radioLowPriority"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="@string/add_fragment_priority_low" />
-
-        </RadioGroup>
-
-
-        <RadioGroup
-            android:id="@+id/radioGroupCategory"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dueDateInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_margin="16dp"
-            android:padding="16dp">
+            android:layout_marginBottom="@dimen/input_margin"
+            android:hint="@string/add_fragment_due_date_hint">
 
-            <RadioButton
-                android:id="@+id/radioCategoryWork"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dueDateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/input_margin"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/add_fragment_category_work"/>
+                android:layout_weight="1"
+                android:text="@string/add_fragment_priority"
+                android:layout_gravity="center"/>
 
-            <RadioButton
-                android:id="@+id/radioCategoryStudy"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/prioritySpinner"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/add_fragment_category_study"/>
+                android:layout_weight="2" />
 
-            <RadioButton
-                android:id="@+id/radioCategoryShopping"
-                android:layout_width="wrap_content"
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/input_margin"
+            android:weightSum="3">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/add_fragment_category_shopping"/>
+                android:layout_weight="1"
+                android:text="@string/add_fragment_category"
+                android:layout_gravity="center"/>
 
-            <RadioButton
-                android:id="@+id/radioCategoryLeisure"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/categorySpinner"
+                style="@style/Widget.AppCompat.Spinner.Underlined"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/add_fragment_category_leisure"/>
+                android:layout_weight="2" />
 
-        </RadioGroup>
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_fragment_add" />
 
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
+    <ProgressBar
+        android:id="@+id/progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layoutRadioGroups"
-        android:layout_centerHorizontal="true"
-        android:text="@string/add_fragment_add" />
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 
 
-</RelativeLayout>
+</FrameLayout>

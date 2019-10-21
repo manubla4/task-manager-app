@@ -31,5 +31,7 @@ class SummaryFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
+    companion object {
+        val instance: SummaryFragment = SummaryFragment()
+    }
 }

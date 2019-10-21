@@ -2,18 +2,24 @@ package com.manubla.taskmanager.view.home
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
+import com.manubla.taskmanager.extension.invisible
+import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.view.home.categories.CategoriesFragment
-import com.manubla.taskmanager.view.home.summary.SummaryFragment
 import com.manubla.taskmanager.view.home.profile.ProfileFragment
+import com.manubla.taskmanager.view.home.summary.SummaryFragment
 import com.manubla.taskmanager.view.home.todo.TodoFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_home.*
+
 
 class HomeActivity : AppCompatActivity(),
     BaseFragment.OnFragmentInteractionListener {
@@ -22,14 +28,14 @@ class HomeActivity : AppCompatActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_home)
 
         if (savedInstanceState == null) {
 
-            val homeFragment = SummaryFragment()
-            val todoFragment = TodoFragment()
-            val categoriesFragment = CategoriesFragment()
-            val profileFragment = ProfileFragment()
+            val homeFragment = SummaryFragment.instance
+            val todoFragment = TodoFragment.instance
+            val categoriesFragment = CategoriesFragment.instance
+            val profileFragment = ProfileFragment.instance
 
             viewpager.apply {
                 offscreenPageLimit =
@@ -91,7 +97,7 @@ class HomeActivity : AppCompatActivity(),
                 .alpha(1f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        visibility = View.VISIBLE
+                        visible()
                     }
                 })
         }
@@ -104,61 +110,34 @@ class HomeActivity : AppCompatActivity(),
                 .alpha(0f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        visibility = View.INVISIBLE
+                        invisible()
                     }
                 })
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.main_menu, menu)
-//        return true
-//    }
 
-//    override fun onOptionsItemSelected(item: MenuItem?) = item?.let {
-//        when (it.itemId) {
-//            R.id.action_add -> {
-//                startActivityForResult(
-//                    Intent(this, AddActivity::class.java)
-//                    , addActionRequestCode
-//                )
-//            }
-//        }
-//        true
-//    } ?: super.onOptionsItemSelected(item)
-//
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        when (requestCode) {
-//            addActionRequestCode -> {
-//                if (resultCode == Activity.RESULT_OK) {
-//                    data?.let {
-//                        addActionToTodoList(it.getParcelableExtra(resultInput))
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    private fun addActionToTodoList(action: Action) {
-//        todos.add(action)
-//        updateCurrentFragment()
-//    }
-//
-//    private fun updateCurrentFragment() {
-//        supportFragmentManager.findFragmentByTag(TodoFragment.todoFragmentTag).also {
-//            it?.let { fragment ->
-//                if (fragment.isVisible && fragment is TodoFragment) {
-//                    fragment.updateAdapterData(todos)
-//                }
-//            }
-//        }
-//    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            ADD_TODO_REQUEST_CODE -> {
+                if (resultCode == Activity.RESULT_OK && TodoFragment.instance.isVisible) {
+                    data?.let {
+                        TodoFragment.instance.createTodo(it.getParcelableExtra(resultInput))
+                    }
+                }
+            }
+        }
+    }
 
 
-    override fun onFragmentInteraction(input: Action) {
 
+    override fun onFragmentInteraction(input: Parcelable) {
+        val action = input as Action
+        when (action.actionType) {
+            SHOW_PROGRESS_ACTION -> showProgress()
+            HIDE_PROGRESS_ACTION -> hideProgress()
+        }
     }
 
     companion object {
@@ -167,7 +146,10 @@ class HomeActivity : AppCompatActivity(),
         private const val POSITION_CATEGORIES = 2
         private const val POSITION_PROFILE    = 3
 
-        private const val ADD_ACTION_REQUEST_CODE = 1001
+        const val ADD_TODO_REQUEST_CODE = 1001
+
+        const val SHOW_PROGRESS_ACTION = 2001
+        const val HIDE_PROGRESS_ACTION = 2002
 
         const val resultInput = "String:Input"
     }

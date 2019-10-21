@@ -66,7 +66,7 @@ class SignupFragment : Fragment(), CoroutineScope {
             result = false
         }
         else if (!emailRegex.matcher(email).matches()) {
-            emailInputLayout.error = getString(R.string.wrong_format)
+            emailInputLayout.error = getString(R.string.auth_activity_wrong_format)
             result = false
         }
 
@@ -81,8 +81,8 @@ class SignupFragment : Fragment(), CoroutineScope {
             }
         }
         else if (password != rePassword) {
-            passwordInputLayout.error = getString(R.string.passwords_dont_match)
-            repasswordInputLayout.error = getString(R.string.passwords_dont_match)
+            passwordInputLayout.error = getString(R.string.auth_activity_passwords_dont_match)
+            repasswordInputLayout.error = getString(R.string.auth_activity_passwords_dont_match)
             result = false
         }
 
@@ -103,13 +103,13 @@ class SignupFragment : Fragment(), CoroutineScope {
                     authController.signup(name, email, password, rePassword)
                     withContext(Dispatchers.Main) {
                         stopLoading()
-                        showLongSuccessMessage(getString(R.string.signup_success), view, activity)
+                        showLongSuccessMessage(getString(R.string.auth_activity_signup_success), view, activity)
                         fragmentManager?.popBackStack()
                     }
                 } catch (exception: Exception) {
                     withContext(Dispatchers.Main) {
                         stopLoading()
-                        showLongErrorMessage(getString(R.string.signup_error), view, activity)
+                        showLongErrorMessage(getString(R.string.auth_activity_signup_error), view, activity)
                     }
                 }
             }

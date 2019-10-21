@@ -1,5 +1,6 @@
 package com.manubla.taskmanager.view.home.todo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,12 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.controller.TodoController
-import com.manubla.taskmanager.data.Action
 import com.manubla.taskmanager.extension.gone
 import com.manubla.taskmanager.extension.visible
-import com.manubla.taskmanager.service.response.TodosReponse
+import com.manubla.taskmanager.service.response.TodoResponse
 import com.manubla.taskmanager.util.showLongErrorMessage
+import com.manubla.taskmanager.util.showLongMessage
 import com.manubla.taskmanager.view.home.BaseFragment
+import com.manubla.taskmanager.view.home.HomeActivity
+import com.manubla.taskmanager.view.home.add.AddActivity
 import kotlinx.android.synthetic.main.fragment_todo.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,16 +26,10 @@ import kotlin.coroutines.CoroutineContext
 class TodoFragment : BaseFragment() , CoroutineScope {
 
     private val todoController = TodoController()
+    private var creating = true
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-
-    var todos: List<Action> = listOf()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        todos = arguments?.getParcelableArrayList(actionParams) ?: listOf()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,34 +40,77 @@ class TodoFragment : BaseFragment() , CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
             todoList.layoutManager = LinearLayoutManager(it)
-            todoList.adapter = TodoListAdapter(todos, it)
+            todoList.adapter = TodoListAdapter(listOf())
+            todoList.setHasFixedSize(true)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        retrieveTodos()
+        addFab.setOnClickListener {
+            activity?.startActivityForResult(
+                Intent(activity, AddActivity::class.java),
+                HomeActivity.ADD_TODO_REQUEST_CODE
+            )
+        }
+        swipeLayout.setOnRefreshListener {
+            fetchTodos()
+        }
+        if (creating) {
+            creating = false
+            startLoading()
+            fetchTodos()
+        }
     }
 
     private fun startLoading(){
         todoList.gone()
+        txtEmpty.gone()
         progress.visible()
     }
 
     private fun stopLoading(){
         progress.gone()
         todoList.visible()
+        if (swipeLayout.isRefreshing) {
+            showLongMessage(getString(R.string.refresh_successful), view, activity)
+            swipeLayout.isRefreshing = false
+        }
     }
 
-    private fun retrieveTodos(){
-        startLoading()
+    private fun fetchTodos() {
         launch(Dispatchers.IO) {
             try {
-                val response = todoController.getTodos()
+                val response: List<TodoResponse> = todoController.getTodos()
+                withContext(Dispatchers.Main) {
+                    if (response.isEmpty()) {
+                        stopLoading()
+                        todoList.gone()
+                        txtEmpty.visible()
+                    }
+                    else {
+                        todoList.adapter.let {
+                            (it as? TodoListAdapter)?.let { todoListAdapter ->
+                                todoListAdapter.data = response
+                            }
+                        }
+                        stopLoading()
+                    }
+                }
+            } catch (exception: Exception) {
+                withContext(Dispatchers.Main) {
+                    stopLoading()
+                    showLongErrorMessage(getString(R.string.service_error), view, activity)
+                }
+            }
+        }
+    }
+
+
+    fun createTodo(todo: TodoResponse) {
+        launch(Dispatchers.IO) {
+            try {
+                val response: TodoResponse = todoController.createTodo(todo.priority, todo.description, todo.due_date, todo.category_id)
                 withContext(Dispatchers.Main) {
                     todoList.adapter.let {
                         (it as? TodoListAdapter)?.let { todoListAdapter ->
-                            todoListAdapter.data = response.todos
+                            todoListAdapter.addItem(response)
                         }
                     }
                     stopLoading()
@@ -84,24 +124,7 @@ class TodoFragment : BaseFragment() , CoroutineScope {
         }
     }
 
-
-//    fun updateAdapterData(todos: ArrayList<Action>) {
-//        todoList.visibility = View.VISIBLE
-//        txtEmpty.visibility = View.GONE
-//        todoList.adapter.let {
-//            (it as? TodoListAdapter)?.let { todoListAdapter ->
-//                todoListAdapter.data = todos
-//            }
-//        }
-//    }
-
     companion object {
-        const val actionParams = "Params:Actions"
-
-        fun newInstance(actions: ArrayList<Action>) = TodoFragment().apply {
-            arguments = Bundle().apply {
-                putParcelableArrayList(actionParams, actions)
-            }
-        }
+        val instance: TodoFragment = TodoFragment()
     }
 }
