@@ -8,16 +8,11 @@ import android.view.ViewGroup
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.controller.AuthController
 import com.manubla.taskmanager.controller.UserController
-import com.manubla.taskmanager.extension.gone
-import com.manubla.taskmanager.extension.visible
-import com.manubla.taskmanager.service.response.TodoResponse
 import com.manubla.taskmanager.service.response.UserResponse
 import com.manubla.taskmanager.util.showLongErrorMessage
 import com.manubla.taskmanager.view.auth.AuthActivity
 import com.manubla.taskmanager.view.home.BaseFragment
-import com.manubla.taskmanager.view.home.todo.TodoListAdapter
 import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_todo.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,7 +37,7 @@ class ProfileFragment : BaseFragment() , CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        logOut.setOnClickListener { logout() }
+        logoutButton.setOnClickListener { logout() }
         fetchUserInfo()
     }
 

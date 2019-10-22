@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.controller.TodoController
 import com.manubla.taskmanager.data.Action
+import com.manubla.taskmanager.data.TodoAdapterItem
 import com.manubla.taskmanager.extension.gone
 import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.service.response.TodoResponse
@@ -22,10 +23,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.threeten.bp.format.DateTimeFormatter
+import org.threeten.bp.temporal.ChronoUnit
 import kotlin.coroutines.CoroutineContext
 
 class TodoFragment : BaseFragment(), CoroutineScope, TodoListAdapter.OnAdapterInteraction {
     private val todoController = TodoController()
+    private var todosList: List<TodoResponse> = listOf()
+
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
@@ -74,22 +79,58 @@ class TodoFragment : BaseFragment(), CoroutineScope, TodoListAdapter.OnAdapterIn
     private fun fetchTodos() {
         launch(Dispatchers.IO) {
             try {
-                val response: List<TodoResponse> = todoController.getTodos()
+                todosList = todoController.getTodos()
                 withContext(Dispatchers.Main) {
-                    if (response.isEmpty()) {
-                        stopLoading()
+                    if (todosList.isNotEmpty()) {
+                        val sortedResponse = todosList.sortedBy { it.due_date }
+                        val adapterList = arrayListOf<TodoAdapterItem>()
+                        var currentDate = sortedResponse[0].due_date
+                        for (obj in sortedResponse) {
+
+                            if (sortedResponse.indexOf(obj) == 0 ||
+                                    (currentDate.truncatedTo(ChronoUnit.DAYS) !=
+                                    obj.due_date.truncatedTo(ChronoUnit.DAYS))) {
+                                currentDate = obj.due_date
+                                val item = TodoAdapterItem(
+                                    TodoListAdapter.viewTypeDate,
+                                    0,
+                                    "",
+                                    "",
+                                    "",
+                                    false,
+                                    obj.due_date.dayOfWeek.toString().toLowerCase().capitalize(),
+                                    DateTimeFormatter.ofPattern("dd/MM/yyyy").format(obj.due_date)
+                                )
+                                adapterList.add(item)
+                            }
+
+                            val item = TodoAdapterItem(
+                                TodoListAdapter.viewTypeTodo,
+                                obj.id,
+                                obj.description,
+                                obj.priority,
+                                obj.category.color,
+                                obj.completed,
+                                "",
+                                ""
+                            )
+                            adapterList.add(item)
+                        }
+
+                        todoList.adapter.let {
+                            (it as? TodoListAdapter)?.let { todoListAdapter ->
+                                todoListAdapter.data = adapterList
+                            }
+                        }
+
+                    }
+                    else {
                         todoList.gone()
                         txtEmpty.visible()
                     }
-                    else {
-                        todoList.adapter.let {
-                            (it as? TodoListAdapter)?.let { todoListAdapter ->
-                                todoListAdapter.data = response
-                            }
-                        }
-                        stopLoading()
-                    }
+                    stopLoading()
                 }
+
             } catch (exception: Exception) {
                 withContext(Dispatchers.Main) {
                     stopLoading()
@@ -103,14 +144,9 @@ class TodoFragment : BaseFragment(), CoroutineScope, TodoListAdapter.OnAdapterIn
     fun createTodo(todo: TodoResponse) {
         launch(Dispatchers.IO) {
             try {
-                val response: TodoResponse = todoController.createTodo(todo.priority, todo.description, todo.due_date, todo.category_id)
+                todoController.createTodo(todo.priority, todo.description, todo.due_date, todo.category_id)
                 withContext(Dispatchers.Main) {
-                    todoList.adapter.let {
-                        (it as? TodoListAdapter)?.let { todoListAdapter ->
-                            todoListAdapter.addItem(response)
-                        }
-                    }
-                    stopLoading()
+                    fetchTodos()
                 }
             } catch (exception: Exception) {
                 withContext(Dispatchers.Main) {
@@ -160,14 +196,23 @@ class TodoFragment : BaseFragment(), CoroutineScope, TodoListAdapter.OnAdapterIn
     }
 
 
-    override fun onModifyTodo(completed: Boolean, todo: TodoResponse) {
-        listener?.onFragmentInteraction(Action(HomeActivity.SHOW_PROGRESS_ACTION))
-        modifyTodo(completed, todo)
+    override fun onModifyTodo(completed: Boolean, idTodo: Int) {
+        for (todo in todosList) {
+            if (todo.id == idTodo) {
+                modifyTodo(completed, todo)
+                break
+            }
+        }
     }
 
-    override fun onRemoveTodo(todo: TodoResponse) {
+    override fun onRemoveTodo(idTodo: Int) {
         listener?.onFragmentInteraction(Action(HomeActivity.SHOW_PROGRESS_ACTION))
-        removeTodo(todo)
+        for (todo in todosList) {
+            if (todo.id == idTodo) {
+                removeTodo(todo)
+                break
+            }
+        }
     }
 
     fun onAddTodo(todo: TodoResponse) {

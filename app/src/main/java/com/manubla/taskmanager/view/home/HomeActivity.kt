@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
 import com.manubla.taskmanager.extension.gone
+import com.manubla.taskmanager.extension.invisible
 import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.view.home.categories.CategoriesFragment
 import com.manubla.taskmanager.view.home.profile.ProfileFragment
@@ -109,7 +110,7 @@ class HomeActivity : AppCompatActivity(),
                 .alpha(0f)
                 .setListener(object : AnimatorListenerAdapter() {
                     override fun onAnimationEnd(animation: Animator) {
-                        gone()
+                        invisible()
                     }
                 })
         }

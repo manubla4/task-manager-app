@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/date_row_size"
+    android:layout_height="@dimen/adapter_row_size"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/todo_row_shape"
     android:orientation="horizontal"
     android:gravity="center|start"
-    android:padding="@dimen/fragment_padding">
+    android:padding="15dp">
 
     <TextView
         android:id="@+id/dayTxt"
