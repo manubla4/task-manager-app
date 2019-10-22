@@ -10,4 +10,6 @@
     <color name="colorTransparent">#00000000</color>
     <color name="colorSuccess">#4aab33</color>
     <color name="colorFailure">#DB1B36</color>
+    <color name="colorChartOn">#0090BD</color>
+    <color name="colorChartOff">#005771</color>
 </resources>

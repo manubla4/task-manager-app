@@ -116,7 +116,7 @@ class TodoListAdapter(private val listener: OnAdapterInteraction?, private var i
 
     interface OnAdapterInteraction {
         fun onRemoveTodo(idTodo: Int)
-        fun onModifyTodo(state: Boolean, idTodo: Int)
+        fun onModifyTodo(completed: Boolean, idTodo: Int)
     }
 
     companion object {

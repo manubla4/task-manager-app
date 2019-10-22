@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.view.home.BaseFragment
-import com.manubla.taskmanager.view.home.summary.SummaryFragment
 
 //private const val ARG_PARAM1 = "param1"
 //private const val ARG_PARAM2 = "param2"

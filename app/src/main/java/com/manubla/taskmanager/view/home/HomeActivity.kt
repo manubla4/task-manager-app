@@ -11,12 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.manubla.taskmanager.R
 import com.manubla.taskmanager.data.Action
-import com.manubla.taskmanager.extension.gone
 import com.manubla.taskmanager.extension.invisible
 import com.manubla.taskmanager.extension.visible
 import com.manubla.taskmanager.view.home.categories.CategoriesFragment
 import com.manubla.taskmanager.view.home.profile.ProfileFragment
-import com.manubla.taskmanager.view.home.summary.SummaryFragment
+import com.manubla.taskmanager.view.home.summary.ChartsFragment
 import com.manubla.taskmanager.view.home.todo.TodoFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -32,7 +31,7 @@ class HomeActivity : AppCompatActivity(),
 
         if (savedInstanceState == null) {
 
-            val homeFragment = SummaryFragment.instance
+            val homeFragment = ChartsFragment.instance
             val todoFragment = TodoFragment.instance
             val categoriesFragment = CategoriesFragment.instance
             val profileFragment = ProfileFragment.instance
@@ -73,7 +72,7 @@ class HomeActivity : AppCompatActivity(),
             navigation.setOnNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.navigation_home -> viewpager.currentItem =
-                        POSITION_HOME
+                        POSITION_CHARTS
                     R.id.navigation_todos -> viewpager.currentItem =
                         POSITION_TODOS
                     R.id.navigation_categories -> viewpager.currentItem =
@@ -141,7 +140,7 @@ class HomeActivity : AppCompatActivity(),
     }
 
     companion object {
-        private const val POSITION_HOME       = 0
+        private const val POSITION_CHARTS     = 0
         private const val POSITION_TODOS      = 1
         private const val POSITION_CATEGORIES = 2
         private const val POSITION_PROFILE    = 3
