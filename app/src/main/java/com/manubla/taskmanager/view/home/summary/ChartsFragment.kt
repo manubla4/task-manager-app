@@ -40,13 +40,9 @@ class ChartsFragment: BaseFragment() , CoroutineScope {
         return inflater.inflate(R.layout.fragment_charts, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        startLoading()
-    }
-
     override fun onResume() {
         super.onResume()
+        startLoading()
         contentLayout.removeAllViews()
         fetchData()
     }
